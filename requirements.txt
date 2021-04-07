@@ -1,4 +1,2 @@
 numpy
-inflect
 pytest
-better_profanity
