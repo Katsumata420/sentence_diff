@@ -1,7 +1,3 @@
-"""
-compare
-backtrace
-"""
 import numpy as np
 
 
@@ -89,6 +85,7 @@ class SentenceDiff:
         wer = cost / len(target)
         return wer, matrix
 
+    # backtrace は基本的に置換ベースで行う
     def _do_backtrace(self, actuals, targets, matrix, safe_mode_target=False,
                       safe_mode_actual=False):
         current_target_pos = len(targets) - 1
@@ -110,17 +107,9 @@ class SentenceDiff:
             best = min(start, subst)
 
             # target position や actual position がマイナスになった際は、
-            # 操作に制約をかける
-            ## target position がマイナス: insert のみ
-            """
-            if current_target_pos < 0:
-                return self._do_backtrace(actuals, targets, matrix,
-                                          safe_mode_target=True)
-            if current_actual_pos < 0:
-                return self._do_backtrace(actuals, targets, matrix,
-                                          safe_mode_actual=True)
-            """
-
+            # 操作のポリシーを変える
+            ## target position がマイナス: 置換中心から insert 中心へ
+            ## actual position がマイナス: 置換中心から delete 中心へ
             if insert < best or (current_target_pos < 0 and insert == best):
                 alignment.append((None, actuals[current_actual_pos]))
                 inserts += 1
