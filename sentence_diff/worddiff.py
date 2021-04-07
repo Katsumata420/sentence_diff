@@ -1,9 +1,7 @@
 import re
 import string
 import numpy as np
-import inflect
 import difflib
-from better_profanity import profanity
 from sentence_diff import SentenceDiff
 
 THRESHOLD_PASS = .4
