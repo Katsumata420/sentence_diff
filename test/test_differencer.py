@@ -36,7 +36,7 @@ class TestDifferencer(TestCase):
             "これ は ものすごい 正解 文 です 。")
         assert d.mistakes() == \
             [('に', 'は', 1, 'rep'),
-            ('誤り' None, 3, 'del'),
+            ('誤り', None, 3, 'del'),
             ('分', '正解', 4, 'rep'),
             ('でし', '文', 5, 'rep'),
             ('た', 'です', 6, 'rep')]
@@ -88,5 +88,5 @@ class TestDifferencer(TestCase):
             ('は', True), 
             ('りんご', False), 
             ('が', False),
-            ('すき', True)]
+            ('好き', True)]
 
